@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FilmCell" id="5fK-KG-hi5" customClass="FilmCell" customModule="FilmsApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="177" height="377"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="vi7-fx-ULb">
+                <rect key="frame" x="0.0" y="0.0" width="177" height="377"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bUJ-ty-KIE">
+                        <rect key="frame" x="8" y="8" width="154" height="280"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="154" id="EBI-ae-L9T"/>
+                            <constraint firstAttribute="height" constant="280" id="wFe-7W-ZS0"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название фильма" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L5f-Cj-q12">
+                        <rect key="frame" x="8" y="291" width="153.5" height="20.5"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Рейтинг" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhT-9T-49i">
+                        <rect key="frame" x="8" y="338" width="153.5" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Год выпуска" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gy2-pY-4tK">
+                        <rect key="frame" x="8" y="314.5" width="153.5" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="xhT-9T-49i" firstAttribute="top" secondItem="Gy2-pY-4tK" secondAttribute="bottom" constant="3" id="7na-at-aPf"/>
+                    <constraint firstItem="xhT-9T-49i" firstAttribute="top" secondItem="Gy2-pY-4tK" secondAttribute="bottom" constant="3" id="Aji-fG-Cfy"/>
+                    <constraint firstItem="L5f-Cj-q12" firstAttribute="top" secondItem="bUJ-ty-KIE" secondAttribute="bottom" constant="3" id="D4y-sZ-bqP"/>
+                    <constraint firstItem="xhT-9T-49i" firstAttribute="top" secondItem="Gy2-pY-4tK" secondAttribute="bottom" constant="3" id="Dsj-fy-A8Y"/>
+                    <constraint firstAttribute="trailing" secondItem="L5f-Cj-q12" secondAttribute="trailing" constant="8" id="KgJ-zE-b26"/>
+                    <constraint firstAttribute="bottom" secondItem="xhT-9T-49i" secondAttribute="bottom" constant="18.5" id="MKH-Tu-qU5"/>
+                    <constraint firstItem="bUJ-ty-KIE" firstAttribute="top" secondItem="vi7-fx-ULb" secondAttribute="top" constant="8" id="Rqw-b8-ae1"/>
+                    <constraint firstItem="xhT-9T-49i" firstAttribute="leading" secondItem="vi7-fx-ULb" secondAttribute="leading" constant="8" id="VO1-QF-xHA"/>
+                    <constraint firstItem="L5f-Cj-q12" firstAttribute="leading" secondItem="vi7-fx-ULb" secondAttribute="leading" constant="8" id="W3n-ST-giL"/>
+                    <constraint firstAttribute="trailing" secondItem="Gy2-pY-4tK" secondAttribute="trailing" constant="8" id="Whj-st-EfZ"/>
+                    <constraint firstItem="Gy2-pY-4tK" firstAttribute="leading" secondItem="vi7-fx-ULb" secondAttribute="leading" constant="8" id="cwb-l1-UYH"/>
+                    <constraint firstAttribute="trailing" secondItem="bUJ-ty-KIE" secondAttribute="trailing" constant="8" id="eTH-fQ-c7j"/>
+                    <constraint firstAttribute="trailing" secondItem="xhT-9T-49i" secondAttribute="trailing" constant="8" id="iRG-mg-TTq"/>
+                    <constraint firstItem="Gy2-pY-4tK" firstAttribute="top" secondItem="L5f-Cj-q12" secondAttribute="bottom" constant="3" id="lMF-tw-imU"/>
+                    <constraint firstItem="bUJ-ty-KIE" firstAttribute="leading" secondItem="vi7-fx-ULb" secondAttribute="leading" constant="8" id="tly-zK-P47"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <color key="backgroundColor" red="1" green="0.79045735569999998" blue="0.2124125368" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <size key="customSize" width="198" height="300"/>
+            <connections>
+                <outlet property="filmTitleLabel" destination="L5f-Cj-q12" id="GnS-Rz-d8j"/>
+                <outlet property="posterPreviewImageView" destination="bUJ-ty-KIE" id="uJ2-02-YOh"/>
+                <outlet property="ratingLabel" destination="xhT-9T-49i" id="acf-51-aJZ"/>
+                <outlet property="releaseYearLabel" destination="Gy2-pY-4tK" id="QEa-xE-PAx"/>
+            </connections>
+            <point key="canvasLocation" x="265.21739130434787" y="61.607142857142854"/>
+        </collectionViewCell>
+    </objects>
+</document>
