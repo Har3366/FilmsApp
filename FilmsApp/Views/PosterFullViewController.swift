@@ -10,12 +10,14 @@ import UIKit
 class PosterFullViewController: UIViewController {
 
     @IBOutlet weak var fullPosterImageView: UIImageView!
-    
     @IBOutlet weak var closeButton: UIButton!
+    
+    var detailIndexPath = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        fullPosterImageView.image = UIImage(named: testArray[detailIndexPath].testPic ?? "image1")
     }
     
 
