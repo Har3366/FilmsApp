@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailFilmViewController: UIViewController {
+class DetailFilmViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var filmTitleLabel: UILabel!
@@ -19,6 +19,8 @@ class DetailFilmViewController: UIViewController {
     
     static let storyboardID = "DetailFilmViewControllerS"
     var receivedIndex: Int = 0
+    
+    var transition: RoundingTransition = RoundingTransition()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +34,26 @@ class DetailFilmViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let destinationVC = segue.destination as? PosterFullViewController else {return}
         destinationVC.detailIndexPath = receivedIndex
+        
+        destinationVC.transitioningDelegate = self
+        destinationVC.modalPresentationStyle = .custom
     }
     
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionProfile = .show
+        transition.start = posterImageView.center
+        transition.circleColor = #colorLiteral(red: 1, green: 0.7799600959, blue: 0, alpha: 1)
+        
+        return transition
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.transitionProfile = .cancel
+        transition.start = posterImageView.center
+        transition.circleColor = #colorLiteral(red: 1, green: 0.7799600959, blue: 0, alpha: 1)
+        
+        return transition
+    }
     @IBAction func tapGestureAction(_ sender: UITapGestureRecognizer) {
     }
     

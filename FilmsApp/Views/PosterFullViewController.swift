@@ -20,5 +20,7 @@ class PosterFullViewController: UIViewController {
         fullPosterImageView.image = UIImage(named: testArray[detailIndexPath].testPic ?? "image1")
     }
     
-
+    @IBAction func closeButtonPressed(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
 }
