@@ -27,8 +27,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        model.sortedTestArray = model.testArray
-        
+        model.sorting()
         let xibCell = UINib(nibName: FilmCell.identifier, bundle: nil)
         mainCollectionView.register(xibCell, forCellWithReuseIdentifier: FilmCell.identifier)
         
@@ -74,9 +73,17 @@ extension MainViewController: UICollectionViewDataSource {
 }
 
 extension MainViewController: UICollectionViewDelegate {
-    
+
 }
 
 extension MainViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        model.search(searchTextValue: searchText)
+        mainCollectionView.reloadData()
+    }
     
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        model.sortedTestArray = model.testArray
+        mainCollectionView.reloadData()
+    }
 }

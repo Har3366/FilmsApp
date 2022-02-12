@@ -42,6 +42,25 @@ class Model {
         }
         sortedTestArray = testArray
     }
+    
+    func search(searchTextValue: String) {
+        sortedTestArray = []
+        if searchTextValue == "" {
+            sortedTestArray = testArray
+        } else {
+            for item in testArray {
+                guard let unwrItem = item.testTitle else {
+                    return
+                }
+                if unwrItem.contains(searchTextValue) {
+                    sortedTestArray.append(item)
+                }
+            }
+        }
+        sortedTestArray = testArray.filter({
+            $0.testTitle?.range(of: searchTextValue,options: .caseInsensitive) != nil
+        })
+    }
 }
 
 class Item {

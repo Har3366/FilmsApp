@@ -41,6 +41,13 @@ extension FavoriteFilmsViewController: UICollectionViewDataSource, UICollectionV
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let destVC = storyboard?.instantiateViewController(withIdentifier: DetailFilmViewController.storyboardID) as? DetailFilmViewController else {
+            return
+        }
+        destVC.receivedIndex = model.likedFilmsArray[indexPath.row].id ?? 0
+        present(destVC, animated: true)
+    }
     
 }
 
