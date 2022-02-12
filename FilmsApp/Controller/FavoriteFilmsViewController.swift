@@ -18,7 +18,7 @@ class FavoriteFilmsViewController: UIViewController {
        
         let xibLikedFilmCell = UINib(nibName: LikedFilmCell.identifier, bundle: nil)
         likedFilmsCollectionView.register(xibLikedFilmCell, forCellWithReuseIdentifier: LikedFilmCell.identifier)
-        model.likedFilms
+        model.likedFilms()
         likedBarItem.badgeValue = String(model.likedFilmsArray.count)
         likedFilmsCollectionView.reloadData()
         tabBarController?.reloadInputViews()

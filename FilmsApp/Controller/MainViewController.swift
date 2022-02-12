@@ -41,6 +41,8 @@ class MainViewController: UIViewController {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         
+    
+        
     }
 
  

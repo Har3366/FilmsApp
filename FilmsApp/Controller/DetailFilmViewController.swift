@@ -15,6 +15,8 @@ class DetailFilmViewController: UIViewController, UIViewControllerTransitioningD
     @IBOutlet weak var galleryCollection: UICollectionView!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet weak var likeBtn: UIButton!
+    
     
     var model = Model()
     
@@ -29,6 +31,14 @@ class DetailFilmViewController: UIViewController, UIViewControllerTransitioningD
         filmTitleLabel.text = model.testArray[receivedIndex].testTitle
         releaseYearLabel.text = String(model.testArray[receivedIndex].testYear ?? 1900)
         ratingLabel.text = String(model.testArray[receivedIndex].testRating ?? 0)
+        
+        if model.testArray[receivedIndex].isLiked {
+            likeBtn.alpha = 1
+            likeBtn.tintColor = .black
+        } else {
+            likeBtn.alpha = 0.2
+            likeBtn.tintColor = .gray
+        }
     
     }
     
@@ -56,6 +66,10 @@ class DetailFilmViewController: UIViewController, UIViewControllerTransitioningD
         return transition
     }
     @IBAction func tapGestureAction(_ sender: UITapGestureRecognizer) {
+    }
+    
+    
+    @IBAction func likeBtnAction(_ sender: UIButton) {
     }
     
 }

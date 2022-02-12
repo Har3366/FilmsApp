@@ -26,14 +26,12 @@ class Model {
         Item(id:14,testPic: "image15", testTitle: "Фильм15", testYear: 2015, testRating: 18,isLiked: false)
     ]
     var likedFilmsArray = [Item]()
-    var likedFilms:[Item] {
+    func likedFilms() {
         for i in testArray {
             if i.isLiked {
-                likedFilmsArray.append(i)
+                self.likedFilmsArray.append(i)
             }
         }
-        return likedFilmsArray
-        
     }
     
     var sortedTestArray = [Item]()
