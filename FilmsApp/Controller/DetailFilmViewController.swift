@@ -16,6 +16,7 @@ class DetailFilmViewController: UIViewController, UIViewControllerTransitioningD
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var descriptionTextView: UITextView!
     
+    var model = Model()
     
     static let storyboardID = "DetailFilmViewControllerS"
     var receivedIndex: Int = 0
@@ -24,10 +25,10 @@ class DetailFilmViewController: UIViewController, UIViewControllerTransitioningD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        posterImageView.image = UIImage(named: testArray[receivedIndex].testPic ?? "image1")
-        filmTitleLabel.text = testArray[receivedIndex].testTitle
-        releaseYearLabel.text = testArray[receivedIndex].testYear
-        ratingLabel.text = testArray[receivedIndex].testRating
+        posterImageView.image = UIImage(named: model.testArray[receivedIndex].testPic ?? "image1")
+        filmTitleLabel.text = model.testArray[receivedIndex].testTitle
+        releaseYearLabel.text = String(model.testArray[receivedIndex].testYear ?? 1900)
+        ratingLabel.text = String(model.testArray[receivedIndex].testRating ?? 0)
     
     }
     

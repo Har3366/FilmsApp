@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LikedFilmCell" id="NAO-Va-p9s" customClass="LikedFilmCell" customModule="FilmsApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="177" height="377"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="rjk-GM-O3P">
+                <rect key="frame" x="0.0" y="0.0" width="177" height="377"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dHn-SW-2ld">
+                        <rect key="frame" x="8" y="8" width="154" height="280"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="280" id="5VU-qj-nOR"/>
+                            <constraint firstAttribute="width" constant="154" id="Oop-eo-TSP"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название фильма" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcA-9S-kKJ">
+                        <rect key="frame" x="8" y="291" width="153.5" height="20.5"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Рейтинг" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cma-A3-uyl">
+                        <rect key="frame" x="8" y="338" width="153.5" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Год выпуска" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXp-6C-xTu">
+                        <rect key="frame" x="8" y="314.5" width="153.5" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wmN-c7-s1L">
+                        <rect key="frame" x="111" y="315" width="57" height="55"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain">
+                            <imageReference key="image" image="heart.slash" catalog="system" symbolScale="large"/>
+                        </buttonConfiguration>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="cma-A3-uyl" firstAttribute="leading" secondItem="rjk-GM-O3P" secondAttribute="leading" constant="8" id="11g-Xj-Hy0"/>
+                    <constraint firstAttribute="trailing" secondItem="dHn-SW-2ld" secondAttribute="trailing" constant="8" id="DFL-Dc-l5m"/>
+                    <constraint firstItem="fcA-9S-kKJ" firstAttribute="top" secondItem="dHn-SW-2ld" secondAttribute="bottom" constant="3" id="F0S-Fk-A4Z"/>
+                    <constraint firstItem="dHn-SW-2ld" firstAttribute="top" secondItem="rjk-GM-O3P" secondAttribute="top" constant="8" id="Jgg-36-t7i"/>
+                    <constraint firstItem="dHn-SW-2ld" firstAttribute="leading" secondItem="rjk-GM-O3P" secondAttribute="leading" constant="8" id="MNi-bO-S9Z"/>
+                    <constraint firstAttribute="trailing" secondItem="aXp-6C-xTu" secondAttribute="trailing" constant="8" id="Nx6-is-TLE"/>
+                    <constraint firstAttribute="trailing" secondItem="cma-A3-uyl" secondAttribute="trailing" constant="8" id="W28-jL-Uov"/>
+                    <constraint firstAttribute="trailing" secondItem="fcA-9S-kKJ" secondAttribute="trailing" constant="8" id="bcv-kZ-8Pq"/>
+                    <constraint firstItem="aXp-6C-xTu" firstAttribute="top" secondItem="fcA-9S-kKJ" secondAttribute="bottom" constant="3" id="cAa-0b-uk3"/>
+                    <constraint firstAttribute="bottom" secondItem="cma-A3-uyl" secondAttribute="bottom" constant="18.5" id="ddt-YC-7aQ"/>
+                    <constraint firstItem="aXp-6C-xTu" firstAttribute="leading" secondItem="rjk-GM-O3P" secondAttribute="leading" constant="8" id="j1V-7G-DVH"/>
+                    <constraint firstItem="cma-A3-uyl" firstAttribute="top" secondItem="aXp-6C-xTu" secondAttribute="bottom" constant="3" id="l3m-QL-tMY"/>
+                    <constraint firstItem="cma-A3-uyl" firstAttribute="top" secondItem="aXp-6C-xTu" secondAttribute="bottom" constant="3" id="mLo-vF-D9P"/>
+                    <constraint firstItem="fcA-9S-kKJ" firstAttribute="leading" secondItem="rjk-GM-O3P" secondAttribute="leading" constant="8" id="uUe-cW-2Lo"/>
+                    <constraint firstItem="cma-A3-uyl" firstAttribute="top" secondItem="aXp-6C-xTu" secondAttribute="bottom" constant="3" id="vg9-nv-Ykr"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <color key="backgroundColor" red="1" green="0.79045735569999998" blue="0.2124125368" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <size key="customSize" width="198" height="300"/>
+            <connections>
+                <outlet property="filmTitleLabel" destination="fcA-9S-kKJ" id="BLs-4Y-ofF"/>
+                <outlet property="posterPreviewImageView" destination="dHn-SW-2ld" id="ZEG-8L-FIt"/>
+                <outlet property="ratingLabel" destination="cma-A3-uyl" id="D7m-YB-bUF"/>
+                <outlet property="releaseYearLabel" destination="aXp-6C-xTu" id="B1e-Bm-OPC"/>
+            </connections>
+            <point key="canvasLocation" x="264.49275362318843" y="61.272321428571423"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="heart.slash" catalog="system" width="128" height="115"/>
+    </resources>
+</document>
