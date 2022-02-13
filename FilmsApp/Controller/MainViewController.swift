@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MainViewController: UIViewController {
 
     @IBOutlet weak var mainCollectionView: UICollectionView!
-   
     @IBOutlet weak var sortingBtn: UIBarButtonItem!
+    
     @IBAction func sortingBtnPressed(_ sender: UIBarButtonItem) {
         let arrowUp = UIImage(systemName: "arrow.up")
         let arrowDown = UIImage(systemName: "arrow.down")
@@ -24,10 +25,13 @@ class MainViewController: UIViewController {
     var model = Model()
     var searchController = UISearchController()
     
-    
-  
     override func viewDidLoad() {
         super.viewDidLoad()
+        let realm = try? Realm()
+        let filmObject = FilmObject()
+        
+       
+        model.readRealmDB()
         model.sorting()
         let xibCell = UINib(nibName: FilmCell.identifier, bundle: nil)
         mainCollectionView.register(xibCell, forCellWithReuseIdentifier: FilmCell.identifier)
@@ -45,7 +49,10 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return model.sortedTestArray.count
+        guard let filmObjectsNumber = model.filmObjects?.count else {
+            return 1
+        }
+        return filmObjectsNumber
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -53,7 +60,7 @@ extension MainViewController: UICollectionViewDataSource {
                 FilmCell else {
                     return UICollectionViewCell()
                 }
-        cell.data = self.model.sortedTestArray[indexPath.item]
+        cell.data = self.model.filmObjects?[indexPath.item]
         return cell
     }
     

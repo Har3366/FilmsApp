@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 class Model {
     var testArray:[Item] = [
@@ -33,6 +34,13 @@ class Model {
             }
         }
     }
+    
+    let realm = try? Realm()
+    var filmObjects:Results<FilmObject>?
+    func readRealmDB(){
+        filmObjects = realm?.objects(FilmObject.self)
+    }
+    
     
     var sortedTestArray = [Item]()
     var sorted = false
