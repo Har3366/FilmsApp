@@ -9,9 +9,9 @@ import Foundation
 
 class Model {
     var testArray:[Item] = [
-        Item(id:0,testPic: "image1", testTitle: "Фильм1", testYear: 2001, testRating: 1,isLiked: true),
-        Item(id:1,testPic: "image2", testTitle: "Фильм2", testYear: 2002, testRating: 12,isLiked: false),
-        Item(id:2,testPic: "image3", testTitle: "Фильм3", testYear: 2003, testRating: 3,isLiked: false),
+        Item(id:0,testPic: "image1", testTitle: "Длинное название фильма", testYear: 2001, testRating: 1,isLiked: true),
+        Item(id:1,testPic: "image2", testTitle: "Очень длинное название фильма", testYear: 2002, testRating: 12,isLiked: true),
+        Item(id:2,testPic: "image3", testTitle: "Самое наидлиннющее наименование кинокартины", testYear: 2003, testRating: 3,isLiked: false),
         Item(id:3,testPic: "image4", testTitle: "Фильм4", testYear: 2004, testRating: 5,isLiked: false),
         Item(id:4,testPic: "image5", testTitle: "Фильм5", testYear: 2005, testRating: 6,isLiked: false),
         Item(id:5,testPic: "image6", testTitle: "Фильм6", testYear: 2006, testRating: 7,isLiked: false),

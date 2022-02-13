@@ -13,15 +13,15 @@ class FavoriteFilmsViewController: UIViewController {
     @IBOutlet weak var likedBarItem: UITabBarItem!
     
     var model = Model()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
+        model.likedFilms()
         let xibLikedFilmCell = UINib(nibName: LikedFilmCell.identifier, bundle: nil)
         likedFilmsCollectionView.register(xibLikedFilmCell, forCellWithReuseIdentifier: LikedFilmCell.identifier)
-        model.likedFilms()
-        likedBarItem.badgeValue = String(model.likedFilmsArray.count)
         likedFilmsCollectionView.reloadData()
-        tabBarController?.reloadInputViews()
+        likedBarItem.badgeValue = String(model.likedFilmsArray.count)
     }
     
 
@@ -46,7 +46,8 @@ extension FavoriteFilmsViewController: UICollectionViewDataSource, UICollectionV
             return
         }
         destVC.receivedIndex = model.likedFilmsArray[indexPath.row].id ?? 0
-        present(destVC, animated: true)
+        //present(destVC, animated: true)
+        navigationController?.pushViewController(destVC, animated: true)
     }
     
 }

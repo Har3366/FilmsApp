@@ -45,7 +45,6 @@ class DetailFilmViewController: UIViewController, UIViewControllerTransitioningD
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let destinationVC = segue.destination as? PosterFullViewController else {return}
         destinationVC.detailIndexPath = receivedIndex
-        
         destinationVC.transitioningDelegate = self
         destinationVC.modalPresentationStyle = .custom
     }
@@ -71,5 +70,26 @@ class DetailFilmViewController: UIViewController, UIViewControllerTransitioningD
     
     @IBAction func likeBtnAction(_ sender: UIButton) {
     }
+    
+    
+    @IBAction func filmPicsBtnAction(_ sender: UIButton) {
+    }
+    
+}
+
+extension DetailFilmViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath)
+        return cell
+    }
+    
+    
+}
+
+extension DetailFilmViewController: UICollectionViewDelegate {
     
 }

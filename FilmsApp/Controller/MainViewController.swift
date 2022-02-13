@@ -22,15 +22,15 @@ class MainViewController: UIViewController {
     }
     
     var model = Model()
-    
     var searchController = UISearchController()
     
+    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         model.sorting()
         let xibCell = UINib(nibName: FilmCell.identifier, bundle: nil)
         mainCollectionView.register(xibCell, forCellWithReuseIdentifier: FilmCell.identifier)
-        
         mainCollectionView.delegate = self
         mainCollectionView.dataSource = self
         mainCollectionView.reloadData()
@@ -39,13 +39,8 @@ class MainViewController: UIViewController {
         searchController.searchBar.placeholder = "Поиск фильма..."
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
-        
-    
-        
     }
-
- 
-
+    
 }
 
 extension MainViewController: UICollectionViewDataSource {
@@ -66,7 +61,8 @@ extension MainViewController: UICollectionViewDataSource {
         guard let destinationVC = storyboard?.instantiateViewController(withIdentifier: DetailFilmViewController.storyboardID) as? DetailFilmViewController
         else {return}
         destinationVC.receivedIndex = model.sortedTestArray[indexPath.row].id ?? 0
-        present(destinationVC, animated: true)
+       // present(destinationVC, animated: true)
+        navigationController?.pushViewController(destinationVC, animated: true)
     }
     
     
