@@ -21,14 +21,15 @@ class MainViewController: UIViewController {
         model.sorting()
         mainCollectionView.reloadData()
     }
-    
+    // создание экземпляра модели не из RealmDB
     var model = Model()
     var searchController = UISearchController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let realm = try? Realm()
-        let filmObject = FilmObject()
+        
+        //let realm = try? Realm()
+        //let filmObject = FilmObject()
         
        
         model.readRealmDB()
@@ -44,15 +45,15 @@ class MainViewController: UIViewController {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
     }
-    
+        
 }
 
 extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let filmObjectsNumber = model.filmObjects?.count else {
+        guard let filmObjectsAmount = model.filmObjects?.count else {
             return 1
         }
-        return filmObjectsNumber
+        return filmObjectsAmount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -68,7 +69,6 @@ extension MainViewController: UICollectionViewDataSource {
         guard let destinationVC = storyboard?.instantiateViewController(withIdentifier: DetailFilmViewController.storyboardID) as? DetailFilmViewController
         else {return}
         destinationVC.receivedIndex = model.sortedTestArray[indexPath.row].id ?? 0
-       // present(destinationVC, animated: true)
         navigationController?.pushViewController(destinationVC, animated: true)
     }
     

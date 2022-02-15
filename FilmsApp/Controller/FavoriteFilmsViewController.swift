@@ -12,18 +12,21 @@ class FavoriteFilmsViewController: UIViewController {
     @IBOutlet weak var likedFilmsCollectionView: UICollectionView!
     @IBOutlet weak var likedBarItem: UITabBarItem!
     
+    // создание экземпляра модели не из RealmDB
     var model = Model()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //вызов функции по добавлению фильмов с отметкой isLiked = true в массив likedFilmsArray.  RealmDB не используется
         model.likedFilms()
         let xibLikedFilmCell = UINib(nibName: LikedFilmCell.identifier, bundle: nil)
         likedFilmsCollectionView.register(xibLikedFilmCell, forCellWithReuseIdentifier: LikedFilmCell.identifier)
         likedFilmsCollectionView.reloadData()
+        
+            //вывод в TabBar количества фильмов с отметкой isLiked = true
         likedBarItem.badgeValue = String(model.likedFilmsArray.count)
     }
-    
 
 }
 
