@@ -24,8 +24,6 @@ class FavoriteFilmsViewController: UIViewController {
         likedFilmsCollectionView.register(xibLikedFilmCell, forCellWithReuseIdentifier: LikedFilmCell.identifier)
         likedFilmsCollectionView.reloadData()
         
-            //вывод в TabBar количества фильмов с отметкой isLiked = true
-        likedBarItem.badgeValue = String(model.likedFilmsArray.count)
     }
 
 }

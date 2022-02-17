@@ -25,6 +25,7 @@ class MainViewController: UIViewController {
     var model = Model()
     var searchController = UISearchController()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,7 +34,10 @@ class MainViewController: UIViewController {
         
        
         model.readRealmDB()
+        
         model.sorting()
+        model.likedFilms()
+        
         let xibCell = UINib(nibName: FilmCell.identifier, bundle: nil)
         mainCollectionView.register(xibCell, forCellWithReuseIdentifier: FilmCell.identifier)
         mainCollectionView.delegate = self
@@ -44,6 +48,9 @@ class MainViewController: UIViewController {
         searchController.searchBar.placeholder = "Поиск фильма..."
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
+        
+        tabBarController?.tabBar.items?[1].badgeValue = String(model.likedFilmsArray.count)
+       
     }
         
 }
