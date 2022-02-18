@@ -53,6 +53,9 @@
                         <buttonConfiguration key="configuration" style="plain">
                             <imageReference key="image" image="heart.slash" catalog="system" symbolScale="large"/>
                         </buttonConfiguration>
+                        <connections>
+                            <action selector="unlikeBtnPressed:" destination="NAO-Va-p9s" eventType="touchUpInside" id="IK7-UU-SiG"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

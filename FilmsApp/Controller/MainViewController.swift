@@ -19,7 +19,10 @@ class MainViewController: UIViewController {
         model.sorted.toggle()
         sortingBtn.image = model.sorted ? arrowUp : arrowDown
         model.sorting()
-        mainCollectionView.reloadData()
+        DispatchQueue.main.async {
+            self.mainCollectionView.reloadData()
+        }
+        
     }
     // создание экземпляра модели не из RealmDB
     var model = Model()
@@ -29,27 +32,23 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //let realm = try? Realm()
-        //let filmObject = FilmObject()
-        
-       
-        model.readRealmDB()
-        
         model.sorting()
-        model.likedFilms()
+        model.showLikedFilms()
         
         let xibCell = UINib(nibName: FilmCell.identifier, bundle: nil)
         mainCollectionView.register(xibCell, forCellWithReuseIdentifier: FilmCell.identifier)
         mainCollectionView.delegate = self
         mainCollectionView.dataSource = self
-        mainCollectionView.reloadData()
+        DispatchQueue.main.async {
+            self.mainCollectionView.reloadData()
+        }
         
         searchController.searchBar.delegate = self
         searchController.searchBar.placeholder = "Поиск фильма..."
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         
-        tabBarController?.tabBar.items?[1].badgeValue = String(model.likedFilmsArray.count)
+        tabBarController?.tabBar.items?[1].badgeValue = String(model.likedFilmObjects?.count ?? 0)
        
     }
         
@@ -57,25 +56,24 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let filmObjectsAmount = model.filmObjects?.count else {
-            return 1
-        }
-        return filmObjectsAmount
+        return model.arrayHelper?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = mainCollectionView.dequeueReusableCell(withReuseIdentifier: FilmCell.identifier, for: indexPath) as?
-                FilmCell else {
-                    return UICollectionViewCell()
-                }
-        cell.data = self.model.filmObjects?[indexPath.item]
+                FilmCell,
+              let item = model.arrayHelper?[indexPath.row]
+        else {
+            return UICollectionViewCell()
+        }
+        cell.data = item
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let destinationVC = storyboard?.instantiateViewController(withIdentifier: DetailFilmViewController.storyboardID) as? DetailFilmViewController
         else {return}
-        destinationVC.receivedIndex = model.sortedTestArray[indexPath.row].id ?? 0
+        destinationVC.receivedIndex = model.arrayHelper?[indexPath.row].id ?? 0
         navigationController?.pushViewController(destinationVC, animated: true)
     }
     
@@ -88,12 +86,22 @@ extension MainViewController: UICollectionViewDelegate {
 
 extension MainViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        model.arrayHelper = model.filmObjects
         model.search(searchTextValue: searchText)
+        if searchBar.text?.count == 0 {
+            model.arrayHelper = model.filmObjects
+            model.sorting()
+        }
         mainCollectionView.reloadData()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        model.sortedTestArray = model.testArray
+        model.arrayHelper = model.filmObjects
+        if searchBar.text?.count == 0 {
+            model.arrayHelper = model.filmObjects
+            model.sorting()
+        }
+        model.sorting()
         mainCollectionView.reloadData()
     }
 }

@@ -16,16 +16,28 @@ class LikedFilmCell: UICollectionViewCell {
     @IBOutlet weak var releaseYearLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
     
-    var data: Item? {
+    var model = Model()
+    var data: FilmObject? {
         didSet {
-            guard data != nil else {
+            guard let unwrData = data else {
                 return
             }
-            posterPreviewImageView.image = UIImage(named: data?.testPic ?? "image1")
-            filmTitleLabel.text = data?.testTitle
-            releaseYearLabel.text = String(data?.testYear ?? 0)
-            ratingLabel.text = String(data?.testRating ?? 0)
+            posterPreviewImageView.image = UIImage(named: unwrData.filmPic)
+            filmTitleLabel.text = unwrData.filmTitle
+            releaseYearLabel.text = String(unwrData.filmYear)
+            ratingLabel.text = String(unwrData.filmRating)
         }
     }
     
+    @IBAction func unlikeBtnPressed(_ sender: UIButton) {
+        guard let likedData = data else {
+            return
+        }
+        model.updateLike(at: likedData.id)
+        if alpha == 0.55 {
+            alpha = 1
+        } else if alpha == 1 {
+            alpha = 0.55
+        }
+    }
 }

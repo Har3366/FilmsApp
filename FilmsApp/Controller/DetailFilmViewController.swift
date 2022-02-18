@@ -27,18 +27,21 @@ class DetailFilmViewController: UIViewController, UIViewControllerTransitioningD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        posterImageView.image = UIImage(named: model.testArray[receivedIndex].testPic ?? "image1")
-        filmTitleLabel.text = model.testArray[receivedIndex].testTitle
-        releaseYearLabel.text = String(model.testArray[receivedIndex].testYear ?? 1900)
-        ratingLabel.text = String(model.testArray[receivedIndex].testRating ?? 0)
-        
-        if model.testArray[receivedIndex].isLiked {
-            likeBtn.alpha = 1
-            likeBtn.tintColor = .black
-        } else {
-            likeBtn.alpha = 0.2
-            likeBtn.tintColor = .gray
+        DispatchQueue.main.async {
+            self.posterImageView.image = UIImage(named: self.model.filmObjects?[self.receivedIndex].filmPic ?? "image1")
+            self.filmTitleLabel.text = self.model.filmObjects?[self.receivedIndex].filmTitle
+            self.releaseYearLabel.text = String(self.model.filmObjects?[self.receivedIndex].filmYear ?? 1900)
+            self.ratingLabel.text = String(self.model.filmObjects?[self.receivedIndex].filmRating ?? 0)
+            
+            if self.model.testArray[self.receivedIndex].isLiked {
+                self.likeBtn.alpha = 1
+                self.likeBtn.tintColor = .black
+            } else {
+                self.likeBtn.alpha = 0.2
+                self.likeBtn.tintColor = .gray
+            }
         }
+        
     
     }
     
@@ -69,6 +72,16 @@ class DetailFilmViewController: UIViewController, UIViewControllerTransitioningD
     
     
     @IBAction func likeBtnAction(_ sender: UIButton) {
+        model.updateLike(at: receivedIndex)
+        
+        if likeBtn.alpha == 1 {
+            likeBtn.alpha = 0.45
+            likeBtn.tintColor = .gray
+        } else {
+            likeBtn.alpha = 1
+            likeBtn.tintColor = .black
+        }
+        
     }
     
     

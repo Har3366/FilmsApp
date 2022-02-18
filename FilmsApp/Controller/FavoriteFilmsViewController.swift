@@ -12,32 +12,49 @@ class FavoriteFilmsViewController: UIViewController {
     @IBOutlet weak var likedFilmsCollectionView: UICollectionView!
     @IBOutlet weak var likedBarItem: UITabBarItem!
     
-    // создание экземпляра модели не из RealmDB
+    
     var model = Model()
+    let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //вызов функции по добавлению фильмов с отметкой isLiked = true в массив likedFilmsArray.  RealmDB не используется
-        model.likedFilms()
+        model.showLikedFilms()
         let xibLikedFilmCell = UINib(nibName: LikedFilmCell.identifier, bundle: nil)
         likedFilmsCollectionView.register(xibLikedFilmCell, forCellWithReuseIdentifier: LikedFilmCell.identifier)
-        likedFilmsCollectionView.reloadData()
+        likedBarItem.badgeValue = String(model.likedFilmObjects?.count ?? 0)
+        DispatchQueue.main.async {
+            self.likedFilmsCollectionView.reloadData()
+        }
+        
+        
+        refreshControl.addTarget(self, action: #selector(needToRefresh), for: .valueChanged)
+        likedFilmsCollectionView.alwaysBounceVertical = true
+        likedFilmsCollectionView.refreshControl = refreshControl
+        
+       
         
     }
-
+    @objc func needToRefresh(){
+        model.showLikedFilms()
+        likedBarItem.badgeValue = String(model.likedFilmObjects?.count ?? 0)
+        likedFilmsCollectionView.reloadData()
+        refreshControl.endRefreshing()
+    }
 }
 
 extension FavoriteFilmsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        model.likedFilmsArray.count
+        return model.likedFilmObjects?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = likedFilmsCollectionView.dequeueReusableCell(withReuseIdentifier: LikedFilmCell.identifier, for: indexPath) as? LikedFilmCell else {
+        guard let cell = likedFilmsCollectionView.dequeueReusableCell(withReuseIdentifier: LikedFilmCell.identifier, for: indexPath) as? LikedFilmCell,
+              let likedItem = model.likedFilmObjects?[indexPath.item]
+        else {
             return UICollectionViewCell()
         }
-        cell.data = self.model.likedFilmsArray[indexPath.item]
+        cell.data = likedItem
            return cell
         
     }
@@ -46,8 +63,7 @@ extension FavoriteFilmsViewController: UICollectionViewDataSource, UICollectionV
         guard let destVC = storyboard?.instantiateViewController(withIdentifier: DetailFilmViewController.storyboardID) as? DetailFilmViewController else {
             return
         }
-        destVC.receivedIndex = model.likedFilmsArray[indexPath.row].id ?? 0
-        //present(destVC, animated: true)
+        destVC.receivedIndex = model.likedFilmObjects?[indexPath.row].id ?? 0
         navigationController?.pushViewController(destVC, animated: true)
     }
     

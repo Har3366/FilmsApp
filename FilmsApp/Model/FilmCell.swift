@@ -17,13 +17,13 @@ class FilmCell: UICollectionViewCell {
     
     var data: FilmObject? {
         didSet {
-            guard data != nil else {
+            guard let unwrData = data else {
                 return
             }
-            posterPreviewImageView.image = UIImage(named: data?.filmPic ?? "image0")
-            filmTitleLabel.text = data?.filmTitle
-            releaseYearLabel.text = String(data?.filmYear ?? 0)
-            ratingLabel.text = String(data?.filmRating ?? 0)
+            posterPreviewImageView.image = UIImage(named: unwrData.filmPic)
+            filmTitleLabel.text = unwrData.filmTitle
+            releaseYearLabel.text = String(unwrData.filmYear)
+            ratingLabel.text = String(unwrData.filmRating)
         }
     }
 }

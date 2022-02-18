@@ -26,48 +26,42 @@ class Model {
         Item(id:13,testPic: "image14", testTitle: "Фильм14", testYear: 2014, testRating: 101,isLiked: false),
         Item(id:14,testPic: "image15", testTitle: "Фильм15", testYear: 2015, testRating: 18,isLiked: false)
     ]
-    var likedFilmsArray = [Item]()
-    func likedFilms() {
-        for i in testArray {
-            if i.isLiked {
-                self.likedFilmsArray.append(i)
-            }
-        }
-    }
-    
+
     let realm = try? Realm()
-    var filmObjects:Results<FilmObject>?
-    func readRealmDB(){
-        filmObjects = realm?.objects(FilmObject.self)
+    
+    var filmObjects:Results<FilmObject>? {
+        return realm?.objects(FilmObject.self)
     }
-    
-    
-    var sortedTestArray = [Item]()
+    var sortedFilmObjects:Results<FilmObject>?
+    var arrayHelper: Results<FilmObject>? // дополнительная переменная для перехода к RealmDB модели
     var sorted = false
+    var likedFilmObjects:Results<FilmObject>?
+    
     func sorting() {
-        self.testArray.sort {
-            sorted ? ( $0.testRating ?? 0 < $1.testRating ?? 0) : ( $0.testRating ?? 0 > $1.testRating ?? 0)
-        }
-        sortedTestArray = testArray
+        arrayHelper = filmObjects?.sorted(byKeyPath:"filmRating", ascending: sorted)
     }
     
     func search(searchTextValue: String) {
-        sortedTestArray = []
-        if searchTextValue == "" {
-            sortedTestArray = testArray
-        } else {
-            for item in testArray {
-                guard let unwrItem = item.testTitle else {
-                    return
-                }
-                if unwrItem.contains(searchTextValue) {
-                    sortedTestArray.append(item)
+       let predicate = NSPredicate(format: "filmTitle CONTAINS [c]%@", searchTextValue)
+        arrayHelper = filmObjects?.filter(predicate)
+    }
+    
+    func showLikedFilms() {
+        let likeFilter = NSPredicate(format: "isLiked = true")
+        likedFilmObjects = filmObjects?.filter(likeFilter)
+    }
+    
+    func updateLike(at item: Int) {
+        if let film = filmObjects?[item] {
+            do {
+                try realm?.write {
+                    film.isLiked = !film.isLiked
                 }
             }
+            catch {
+                print("Error saving done status, \(error)")
+            }
         }
-        sortedTestArray = testArray.filter({
-            $0.testTitle?.range(of: searchTextValue,options: .caseInsensitive) != nil
-        })
     }
 }
 
