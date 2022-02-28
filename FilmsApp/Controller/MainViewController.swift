@@ -25,7 +25,8 @@ class MainViewController: UIViewController {
         
     }
     // создание экземпляра модели не из RealmDB
-    var model = Model()
+    let model = Model()
+    let service = URLService()
     var searchController = UISearchController()
     
     
@@ -40,29 +41,30 @@ class MainViewController: UIViewController {
         mainCollectionView.delegate = self
         mainCollectionView.dataSource = self
         DispatchQueue.main.async {
-            self.mainCollectionView.reloadData()
+            self.service.dataRequest()
         }
-        
+        mainCollectionView.reloadData()
         searchController.searchBar.delegate = self
         searchController.searchBar.placeholder = "Поиск фильма..."
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         
         tabBarController?.tabBar.items?[1].badgeValue = String(model.likedFilmObjects?.count ?? 0)
-       
+        
+        service.dataRequest()
     }
         
 }
 
 extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return model.arrayHelper?.count ?? 0
+        return model.filmObjects?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = mainCollectionView.dequeueReusableCell(withReuseIdentifier: FilmCell.identifier, for: indexPath) as?
                 FilmCell,
-              let item = model.arrayHelper?[indexPath.row]
+              let item = model.filmObjects?[indexPath.row]
         else {
             return UICollectionViewCell()
         }
@@ -73,7 +75,7 @@ extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let destinationVC = storyboard?.instantiateViewController(withIdentifier: DetailFilmViewController.storyboardID) as? DetailFilmViewController
         else {return}
-        destinationVC.receivedIndex = model.arrayHelper?[indexPath.row].id ?? 0
+        destinationVC.receivedIndex = indexPath.row
         navigationController?.pushViewController(destinationVC, animated: true)
     }
     
@@ -102,6 +104,9 @@ extension MainViewController: UISearchBarDelegate {
             model.sorting()
         }
         model.sorting()
-        mainCollectionView.reloadData()
+        
+        DispatchQueue.main.async {
+            self.mainCollectionView.reloadData()
+        }
     }
 }

@@ -17,23 +17,27 @@ class DetailFilmViewController: UIViewController, UIViewControllerTransitioningD
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var likeBtn: UIButton!
     
-    
-    var model = Model()
-    
     static let storyboardID = "DetailFilmViewControllerS"
+    let model = Model()
     var receivedIndex: Int = 0
+    let service = URLService()
+    let address = "https://image.tmdb.org/t/p/w500"
     
     var transition: RoundingTransition = RoundingTransition()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         DispatchQueue.main.async {
-            self.posterImageView.image = UIImage(named: self.model.filmObjects?[self.receivedIndex].filmPic ?? "image1")
+            guard let unwrFilmPic = self.model.filmObjects?[self.receivedIndex].filmPic,
+                  let posterURL = URL(string: self.address + unwrFilmPic) else { return}
+            self.service.postersSetUp(with: posterURL, imageView: self.posterImageView)
             self.filmTitleLabel.text = self.model.filmObjects?[self.receivedIndex].filmTitle
             self.releaseYearLabel.text = String(self.model.filmObjects?[self.receivedIndex].filmYear ?? 1900)
             self.ratingLabel.text = String(self.model.filmObjects?[self.receivedIndex].filmRating ?? 0)
+            self.descriptionTextView.text = self.model.filmObjects?[self.receivedIndex].overview
             
-            if self.model.testArray[self.receivedIndex].isLiked {
+            if self.model.filmObjects?[self.receivedIndex].isLiked == true {
                 self.likeBtn.alpha = 1
                 self.likeBtn.tintColor = .black
             } else {
