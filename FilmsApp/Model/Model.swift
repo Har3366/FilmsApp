@@ -49,19 +49,57 @@ class Model {
         arrayHelper = filmObjects?.filter(predicate)
     }
     
-    func showLikedFilms() {
-        let likeFilter = NSPredicate(format: "isLiked = true")
-        likedFilmObjects = filmObjects?.filter(likeFilter)
-    }
-    
-    func updateLike(at item: Int) {
-        if let film = filmObjects?[item] {
-            do {
-                try realm?.write {
-                    film.isLiked = !film.isLiked
+    func deleteLikedItem(at item: Int) {
+        do {
+        try realm?.write({
+        
+            if let likedArray = likedFilmObjects, let likedObject = likedFilmObjects?[item] {
+                likedObject.isLiked = !likedObject.isLiked
+                
+                for i in likedArray {
+                    if i.isLiked == false {
+                        realm?.delete(i)
+                    }
                 }
             }
-            catch {
+            
+        })
+        } catch {
+            print("Error saving done status, \(error)")
+        }
+    }
+    
+    
+    func updateLike(at item: Int) {
+        var localChecker: [FilmObject] = []
+        if let film = filmObjects?[item],
+           let array = filmObjects{
+            let object = LikedFilmObject()
+                do {
+                
+                    try realm?.write ({
+                    
+                        film.isLiked.toggle()
+                    
+                        for i in array {
+                            if i.isLiked == true {
+                                localChecker.append(i)
+                            }
+                        }
+                        
+                        for el in localChecker {
+                            object.id = el.id
+                            object.filmPic = el.filmPic
+                            object.filmTitle = el.filmTitle
+                            object.overview = el.overview
+                            object.filmYear = el.filmYear
+                            object.filmRating = el.filmRating
+                            
+                            realm?.add(object, update: .all)
+                        }
+                    })
+            } catch {
+                // обрабатываем ошибки
                 print("Error saving done status, \(error)")
             }
         }

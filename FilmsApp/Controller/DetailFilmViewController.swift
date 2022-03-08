@@ -31,7 +31,9 @@ class DetailFilmViewController: UIViewController, UIViewControllerTransitioningD
         DispatchQueue.main.async {
             guard let unwrFilmPic = self.model.filmObjects?[self.receivedIndex].filmPic,
                   let posterURL = URL(string: self.address + unwrFilmPic) else { return}
-            self.service.postersSetUp(with: posterURL, imageView: self.posterImageView)
+            self.service.posterSetUp(with: posterURL) { image in
+                self.posterImageView.image = image
+            }
             self.filmTitleLabel.text = self.model.filmObjects?[self.receivedIndex].filmTitle
             self.releaseYearLabel.text = String(self.model.filmObjects?[self.receivedIndex].filmYear ?? 1900)
             self.ratingLabel.text = String(self.model.filmObjects?[self.receivedIndex].filmRating ?? 0)

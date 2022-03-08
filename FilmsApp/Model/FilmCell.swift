@@ -22,7 +22,9 @@ class FilmCell: UICollectionViewCell {
             guard let unwrData = data, let url = URL(string: address + unwrData.filmPic) else {
                 return
             }
-            urlService.postersSetUp(with: url, imageView: posterPreviewImageView)
+            urlService.posterSetUp(with: url) { image in
+                self.posterPreviewImageView.image = image
+            }
             filmTitleLabel.text = unwrData.filmTitle
             releaseYearLabel.text = String(unwrData.filmYear)
             ratingLabel.text = String(unwrData.filmRating)

@@ -285,8 +285,8 @@
                                     <action selector="likeBtnAction:" destination="IhT-dL-kFh" eventType="touchUpInside" id="Yvr-n2-7ks"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Edd-LV-d34">
-                                <rect key="frame" x="328.5" y="466" width="45" height="131"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Edd-LV-d34">
+                                <rect key="frame" x="349" y="466" width="45" height="131"/>
                                 <color key="backgroundColor" red="1" green="0.79045735569999998" blue="0.2124125368" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="131" id="Bis-76-Xao"/>

@@ -20,12 +20,14 @@ class LikedFilmCell: UICollectionViewCell {
     let urlService = URLService()
     let address = "https://image.tmdb.org/t/p/w500"
     
-    var data: FilmObject? {
+    var data: LikedFilmObject? {
         didSet {
             guard let unwrData = data, let url = URL(string: address + unwrData.filmPic) else {
                 return
             }
-            urlService.postersSetUp(with: url, imageView: posterPreviewImageView)
+            urlService.posterSetUp(with: url) { image in
+                self.posterPreviewImageView.image = image
+            }
             filmTitleLabel.text = unwrData.filmTitle
             releaseYearLabel.text = String(unwrData.filmYear)
             ratingLabel.text = String(unwrData.filmRating)

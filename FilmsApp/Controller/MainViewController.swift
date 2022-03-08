@@ -34,7 +34,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         model.sorting()
-        model.showLikedFilms()
+       
         
         let xibCell = UINib(nibName: FilmCell.identifier, bundle: nil)
         mainCollectionView.register(xibCell, forCellWithReuseIdentifier: FilmCell.identifier)

@@ -21,7 +21,9 @@ class PosterFullViewController: UIViewController {
         
         guard let unwrFilmPic = self.model.filmObjects?[self.detailIndexPath].filmPic,
               let posterURL = URL(string: self.address + unwrFilmPic) else {return}
-        service.postersSetUp(with: posterURL, imageView: fullPosterImageView)
+        service.posterSetUp(with: posterURL) { image in
+            self.fullPosterImageView.image = image
+        }
     }
     
     @IBAction func closeButtonPressed(_ sender: UIButton) {

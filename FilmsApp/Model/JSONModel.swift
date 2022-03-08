@@ -20,7 +20,14 @@ class Result: Codable {
     var release_date: String?
     var overview: String?
     var vote_average: Double?
-    var backdrop_path: String?
+    var backdrop_path: [Backdrop]?
+}
+
+class Backdrop: Codable {
+    var aspect_ratio: Double?
+    var height: Int
+    var file_path: String?
+    var width: Int
 }
 
 

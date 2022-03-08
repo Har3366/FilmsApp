@@ -19,7 +19,7 @@ class FavoriteFilmsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        model.showLikedFilms()
+        
         let xibLikedFilmCell = UINib(nibName: LikedFilmCell.identifier, bundle: nil)
         likedFilmsCollectionView.register(xibLikedFilmCell, forCellWithReuseIdentifier: LikedFilmCell.identifier)
         likedBarItem.badgeValue = String(model.likedFilmObjects?.count ?? 0)
@@ -36,7 +36,7 @@ class FavoriteFilmsViewController: UIViewController {
         
     }
     @objc func needToRefresh(){
-        model.showLikedFilms()
+        
         likedBarItem.badgeValue = String(model.likedFilmObjects?.count ?? 0)
         likedFilmsCollectionView.reloadData()
         refreshControl.endRefreshing()
@@ -55,6 +55,7 @@ extension FavoriteFilmsViewController: UICollectionViewDataSource, UICollectionV
             return UICollectionViewCell()
         }
         cell.data = likedItem
+        
            return cell
         
     }

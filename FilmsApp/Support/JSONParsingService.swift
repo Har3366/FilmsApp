@@ -19,10 +19,10 @@ class JSONParsingService{
                 for item in jsonObjects {
                     let object = FilmObject()
                     if let unwrID = item.id,
-                        let unwrPosterPath = item.poster_path,
+                       let unwrPosterPath = item.poster_path,
                        let unwrOriginalTitle = item.original_title,
                        let unwrOverview = item.overview,
-                        let unwrReleaseDate = item.release_date,
+                       let unwrReleaseDate = item.release_date,
                        let unwrVoteAverage = item.vote_average,
                        let unwrBackdropPath = item.backdrop_path {
                         object.id = unwrID
@@ -39,7 +39,7 @@ class JSONParsingService{
                     realm?.add(object,update: .all)  //обновление уже записанных данных
                 }
             })
-            print("Object with films - \(filmObject.results[0].original_title)")
+            
         } catch let error {
             print(error)
         }

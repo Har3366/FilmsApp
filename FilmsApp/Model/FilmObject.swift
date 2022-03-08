@@ -17,6 +17,7 @@ class FilmObject: Object {
     @objc dynamic var isLiked:Bool = false
     @objc dynamic var backdrop_path:String = ""
     @objc dynamic var overview:String = ""
+    dynamic var screenshots: List<String> = List<String>()
     
     override class func primaryKey() -> String? {
         return "id"
